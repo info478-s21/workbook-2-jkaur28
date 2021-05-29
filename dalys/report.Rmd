@@ -1,0 +1,19 @@
+---
+title: "Colombia Health Loss"
+output: html_document
+---
+
+Write your report here!
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+# Set up 
+library(dplyr)
+library(knitr)
+library(ggplot2)
+
+# Load data
+colombia_data <- read.csv('data/prepped/overview.csv')
+
+```
+
+Make sure to build your own visualization that compares burden **across metrics** (i.e., YLLs to YLDs).
