@@ -90,5 +90,3 @@ most_similar <-  greater_yld %>%
   filter(ylls > 0) %>% 
   top_n(-1,diff) %>%  
   select(cause)
-# For each cause, compute how many cases would have to have to be avoided
-# to equal 65 YLLs (the equivalent of one death of a ~25 year old)
