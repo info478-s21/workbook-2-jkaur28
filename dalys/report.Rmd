@@ -16,4 +16,70 @@ colombia_data <- read.csv('data/prepped/overview.csv')
 
 ```
 
-Make sure to build your own visualization that compares burden **across metrics** (i.e., YLLs to YLDs).
+## DEATHS
+```{r deaths, echo=FALSE}
+
+deaths <- colombia_data %>% 
+  filter(metric == 'deaths') %>% 
+  arrange(desc(Value))
+
+deaths$Value <- deaths$Value * 100
+
+deaths <- deaths %>% 
+  top_n(10, Value)
+
+ggplot(deaths, aes(x=cause, y=Value)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Top 10 causes for maximum number of deaths", x="Causes", y="Number of Deaths") +
+  coord_flip()
+```
+
+
+## YLLS
+``` {r ylls, echo=FALSE}
+ylls <- colombia_data %>% 
+  filter(metric == 'ylls') %>% 
+  arrange(desc(Value))
+
+
+ylls <-  ylls %>%  
+  top_n(10, Value)
+
+ggplot(ylls, aes(x=cause, y=Value)) +
+  geom_bar(stat="identity") +
+  labs(title = "Top 10 causes for maximum number of YLLS", x="Causes", y="Number of YLLs") +
+  coord_flip()
+```
+
+## DALYs
+
+``` {r dalys, echo=FALSE}
+dalys <- colombia_data %>% 
+  filter(metric == 'dalys') %>% 
+  arrange(desc(Value))
+
+
+dalys <- dalys %>%  
+  top_n(10, Value)
+
+ggplot(dalys, aes(x=cause, y=Value)) +
+  geom_bar(stat="identity")+
+  labs(title = "Top 10 causes for maximum number of DALYs", x="Causes", y="Number of DALYs") +
+  coord_flip()
+```
+
+## Comparison
+
+### Ischemic Heart Disease
+
+
+
+
+``` {r compare, echo=FALSE}
+ischedis <- colombia_data %>% 
+  filter(cause=="Ischemic heart disease")
+
+ggplot(ischedis, aes(x=metric,y=Value))+
+  geom_bar(stat="identity") +
+  labs(title = "Ischemic Disease Disease across all burdens", x="Burden Metric", y="Value") 
+```
